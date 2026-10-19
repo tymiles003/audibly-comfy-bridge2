@@ -1,0 +1,24 @@
+name: audibly-comfy-bridge
+version: 1
+
+image: <YOUR_DOCKERHUB_USERNAME>/audibly-comfy-bridge:latest
+
+gpu: false
+cpu: 1
+memory: 1G
+
+networking:
+  ports:
+    - port: 9000
+      protocol: http
+
+env:
+  COMFY_BASE_URL: "http://<YOUR_COMFYUI_POD_IP>:8188"
+
+entrypoint:
+  - uvicorn
+  - main:app
+  - --host
+  - 0.0.0.0
+  - --port
+  - "9000"
